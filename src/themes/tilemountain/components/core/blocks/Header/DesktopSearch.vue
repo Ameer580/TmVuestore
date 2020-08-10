@@ -1,11 +1,10 @@
 <template>
   <div class="searchbar-show">
-    <div class="custom-search-icon">
-      <a>
-        <i class="material-icons" @click="searchtoggle">search</i>
-      </a>
-    </div>
-    <div class="searchpanel" data-testid="searchPanel" v-closable="hideSearchPanel">
+    <div
+      class="searchpanel"
+      data-testid="searchPanel"
+      v-closable="hideSearchPanel"
+    >
       <!-- <div class="close-icon-row">
 <i
 class="material-icons pointer cl-accent close-icon"
@@ -14,16 +13,18 @@ data-testid="closeSearchPanel"
 >close</i>
       </div>-->
 
-      <div class="container" ref="searchContainer">
+      <div class="container">
         <div class="row">
           <div class="col-md-12 col-xs-12 end-xs">
-            <label for="search" class="visually-hidden">{{ $t("Search") }}</label>
+            <label for="search" class="visually-hidden">{{
+              $t("Search")
+            }}</label>
             <div class="search-input-group">
               <router-link
                 :disabled="!search.length > 2"
                 :event="search.length > 2 ? 'click' : ''"
                 :style="!search.length > 2 ? 'cursor: default' : ''"
-                :to="localizedRoute('/catalog-search/?s='+search)"
+                :to="localizedRoute('/catalog-search/?s=' + search)"
                 class="search-action-btn"
               >
                 <!-- <i class="material-icons search-icon" ref="searchIconRef" @click="iConClick">search</i> -->
@@ -39,7 +40,10 @@ data-testid="closeSearchPanel"
                   autocomplete="off"
                   :placeholder="$t('Search...')"
                   @keyup="someKeyUpFunction"
-                  @click="searchClick(); showSearchPanel();"
+                  @click="
+                    searchClick();
+                    showSearchPanel();
+                  "
                   v-on:keyup.enter="onEnter"
                 />
               </form>
@@ -55,19 +59,29 @@ class="categories"
 v-model="selectedCategoryIds"
 />
         </div>-->
-        <div id="search-mainmain" class="sb-filters dontshow" v-if="shouldShowProducts">
+        <div
+          id="search-mainmain"
+          class="sb-filters dontshow"
+          v-if="shouldShowProducts"
+        >
           <transition name="fade">
             <div
               v-if="getNoResultsMessage"
               class="no-results relative center-xs h4 col-md-12"
-            >{{ $t(getNoResultsMessage) }}</div>
+            >
+              {{ $t(getNoResultsMessage) }}
+            </div>
           </transition>
           <div class="product-listing row">
             <product-tile
               v-for="product in visibleProducts"
               :key="product.id"
               :product="product"
-              @click.native="hideSearchPanel(); clearSearchBar(); onEnter();"
+              @click.native="
+                hideSearchPanel();
+                clearSearchBar();
+                onEnter();
+              "
             />
           </div>
           <div
@@ -77,11 +91,21 @@ v-model="selectedCategoryIds"
             <button
               class="no-outline brdr-none py15 px20 bg-cl-mine-shaft :bg-cl-th-secondary cl-white fs-medium-small"
               type="button"
-              @click="onSearchSubmit(); onEnter();"
-            >{{ $t("View All Results") }}</button>
+              @click="
+                onSearchSubmit();
+                onEnter();
+              "
+            >
+              {{ $t("View All Results") }}
+            </button>
           </div>
         </div>
       </div>
+    </div>
+    <div class="custom-search-icon">
+      <a>
+        <img src="/assets/icons/search.svg" />
+      </a>
     </div>
   </div>
 </template>
@@ -140,18 +164,18 @@ export default {
         this.hideSearchPanel();
         this.$refs.searchIconRef.click();
       }
-    },
+    }
   },
   directives: {
     closable: {
-      bind: function (el, binding, vnode) {
-        el.eventSetDrag = function () {
+      bind: function(el, binding, vnode) {
+        el.eventSetDrag = function() {
           el.setAttribute("data-dragging", "yes");
         };
-        el.eventClearDrag = function () {
+        el.eventClearDrag = function() {
           el.removeAttribute("data-dragging");
         };
-        el.eventOnClick = function (event) {
+        el.eventOnClick = function(event) {
           var dragging = el.getAttribute("data-dragging");
           // Check that the click was outside the el and its children, and wasn't a drag
           if (
@@ -167,38 +191,38 @@ export default {
         document.addEventListener("click", el.eventOnClick);
         document.addEventListener("touchend", el.eventOnClick);
       },
-      unbind: function (el) {
+      unbind: function(el) {
         document.removeEventListener("touchstart", el.eventClearDrag);
         document.removeEventListener("touchmove", el.eventSetDrag);
         document.removeEventListener("click", el.eventOnClick);
         document.removeEventListener("touchend", el.eventOnClick);
         el.removeAttribute("data-dragging");
-      },
-    },
+      }
+    }
   },
   components: {
-    ProductTile,
+    ProductTile
   },
   mixins: [SearchPanel, VueOfflineMixin],
   validations: {
     search: {
-      minLength: minLength(3),
-    },
+      minLength: minLength(3)
+    }
   },
   data() {
     return {
       selectedCategoryIds: [],
       showPanelNewDesktop: true,
       searchHidden: false,
-      size: 6,
+      size: 6
     };
   },
   computed: {
     visibleProducts() {
       const productList = this.products || [];
       if (this.selectedCategoryIds.length) {
-        return productList.filter((product) =>
-          product.category_ids.some((categoryId) => {
+        return productList.filter(product =>
+          product.category_ids.some(categoryId => {
             const catId = parseInt(categoryId);
             return this.selectedCategoryIds.includes(catId);
           })
@@ -227,12 +251,12 @@ export default {
         msg = "No results were found.";
       }
       return msg;
-    },
+    }
   },
   watch: {
     categories() {
       this.selectedCategoryIds = [];
-    },
+    }
   },
   mounted() {
     // add autofocus to search input field
@@ -242,7 +266,7 @@ export default {
   },
   destroyed() {
     // clearAllBodyScrollLocks();
-  },
+  }
 };
 </script>
 
@@ -261,7 +285,7 @@ export default {
   display: none;
 }
 .searchbar-show {
-  margin-top: 14px;
+  margin-top: 3px;
 }
 .searchpanel {
   visibility: visible;
@@ -296,16 +320,16 @@ export default {
       // margin-top: -5px;
       input {
         max-width: 405px;
-        height: 2.7rem;
+        height: 2.63rem;
         /* border-radius: 3px; */
         width: 100%;
         /* border: 1px solid #bfc3cb; */
         font-size: 0.839375rem;
         padding-left: 0.5rem;
-        border: 1px solid #b3b6b4;
+        // border: 1px solid #434343;
         /* outline: none; */
         background-color: #e6ebee;
-        margin-left: -50px;
+        margin-left: 21px;
         color: #888;
         font-family: sans-serif;
         font-weight: bold;
@@ -429,23 +453,25 @@ export default {
   .searchbar-show {
     width: 100%;
     background-color: #fff;
+    margin: 0px;
   }
   #active-icon {
     visibility: visible;
   }
   .custom-search-icon {
     display: block;
-    position: relative;
-    // padding: 9px 4px;
-    a {
+    position: absolute !important;
+    top: 85px;
+    left: 93%;
+    height: 45px;
+    width: 45px;
+    background-color: #ffffff;
+    border: 2px solid #e3e3e5;
+    img {
+      height: 27px;
       position: absolute;
-      bottom: 6px;
-      right: 185px;
-    }
-    i {
-      color: #d5de29;
-      font-size: 40px;
-      margin-top: 10px;
+      left: 8px;
+      top: 10px;
     }
   }
   .search-bar {
@@ -456,34 +482,26 @@ export default {
       // visibility: hidden;
 
       .container {
-        // padding: 0;
         width: 100%;
-        height: 62px;
-        display: none;
-        margin-left: 0px;
-        background-color: #fff;
-        padding-left: 30px;
-        padding-right: 33px;
+        display: block;
+        padding-left: 15px;
+        padding-right: 15px;
         .search-input-group {
-          // padding-top: 0;
-          // margin-top: 6px;
-          // margin-left: 72px;
-          // width: 92.3%;
-          padding-left: 45px;
-          /* margin: 0px; */
           margin: 0px;
-          margin-top: 7px;
           width: 100%;
           input {
             border-radius: 0;
-            border: 1.5px solid #d6de29;
+            border: 2px solid #e3e3e5;
             max-width: 100%;
             height: 45px;
-            background-color: #e6ebee;
+            background-color: #f7f6f6;
             color: #434343;
             font-family: sans-serif;
             font-weight: bold;
             line-height: 0px !important;
+            margin: 0px;
+            padding: 0px;
+            padding-left: 4rem;
           }
           .search-icon {
             top: 0;

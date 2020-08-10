@@ -5,75 +5,81 @@
       :class="{ 'is-visible': navVisible }"
     >
       <div class="container px15">
-        <div class="row between-xs middle-xs" v-if="!isCheckoutPage || isThankYouPage">
-          <!-- <div class="col-md-4 col-xs-2 middle-xs">
+        <div
+          class="row between-xs middle-xs"
+          v-if="!isCheckoutPage || isThankYouPage"
+        >
+          <div class="col-md-2 col-xs-7 pt5">
             <div>
-              <hamburger-icon class="p15 icon bg-cl-secondary pointer" />
-            </div>
-          </div>-->
-          <!-- <div class="col-xs-2 visible-xs">
-            <search-icon class="p15 icon pointer" />
-          </div>-->
-          <div class="col-lg-2 col-md-2 col-xs-4 pt5">
-            <div>
-              <logo height="78px" width="150px" />
+              <logo width="161px" height="78px" />
             </div>
           </div>
-          <div class="search-bar col-lg-5 col-md-6 col-xs-12 middle-xs">
+          <div class="search-bar col-md-5 col-xs-12 middle-xs">
             <div>
               <DesktopSearch />
             </div>
           </div>
           <!-- <div class="col-xs-2 visible-xs">
-            <wishlist-icon class="p15 icon pointer" />
+            <search-icon class="p15 icon pointer" />
           </div>-->
-          <div class="col-lg-5 col-md-4 col-xs-8 end-xs flex">
-            <!-- <search-icon class="icon pointer" /> -->
-            <Telephone class="icon hidden-xs col-md-4 col-lg-9 pointer p-icon" />
-            <wishlist-icon class="icon hidden-xs pointer col-md-3 col-lg-1 w-icon" />
-            <!-- <compare-icon class="p15 icon hidden-xs pointer" /> -->
-            <account-icon class="icon pointer col-md-3 col-lg-1 a-icon" />
-            <microcart-icon class="icon pointer col-md-3 col-lg-1 m-icon" />
+          <div class="col-xs-1 visible-xs">
+            <Telephone class="pointer" />
+          </div>
+          <div class="col-xs-1 visible-xs">
+            <wishlist-icon class="pointer" />
+          </div>
+          <div class="col-xs-1 visible-xs">
+            <account-icon class="pointer" />
+          </div>
+          <div class="col-md-5 col-xs-2 pr-8">
+            <div class="inline-flex">
+              <!-- <search-icon class="p15 icon hidden-xs pointer" /> -->
+              <Telephone class="p15 icon hidden-xs pointer" />
+              <div class="flex inner-icons">
+                <wishlist-icon class="icon hidden-xs pointer" />
+                <compare-icon class="icon hidden-xs pointer" />
+                <account-icon class="icon hidden-xs pointer" />
+                <microcart-icon class="pointer" />
+              </div>
+            </div>
           </div>
         </div>
-        <div class="row between-xs middle-xs px15 py5" v-if="isCheckoutPage && !isThankYouPage">
-          <!-- <div class="col-xs-5 col-md-3 middle-xs">
+        <div
+          class="row between-xs middle-xs px15 py5"
+          v-if="isCheckoutPage && !isThankYouPage"
+        >
+          <div class="col-xs-5 col-md-3 middle-xs">
             <div>
-              <router-link
-                :to="localizedRoute('/')"
-                class="cl-tertiary links"
-              >{{ $t('Return to shopping') }}</router-link>
+              <router-link :to="localizedRoute('/')" class="cl-tertiary links">
+                {{ $t("Return to shopping") }}
+              </router-link>
             </div>
-          </div>-->
-          <div class="col-xs-2 col-md-12 center-xs">
-            <logo width="auto" height="75px" />
           </div>
-          <!-- <div class="col-xs-5 col-md-3 end-xs">
+          <div class="col-xs-2 col-md-6 center-xs">
+            <logo width="auto" height="41px" />
+          </div>
+          <div class="col-xs-5 col-md-3 end-xs">
             <div>
               <a
                 v-if="!currentUser"
                 href="#"
                 @click.prevent="gotoAccount"
                 class="cl-tertiary links"
-              >{{ $t('Login to your account') }}</a>
-              <span v-else>{{ $t('You are logged in as {firstname}', currentUser) }}</span>
+                >{{ $t("Login to your account") }}</a
+              >
+              <span v-else>
+                {{ $t("You are logged in as {firstname}", currentUser) }}
+              </span>
             </div>
-          </div>-->
+          </div>
         </div>
       </div>
       <nav>
-        <MainMenu />
+        <MainMenu class="hidden-xs" />
+        <hamburger-icon class="sb-mobile-menu pointer hidden-md" />
       </nav>
-      <!-- <nav> -->
-      <!-- <DesktopMenu class="hidden-xs" /> -->
-      <!-- <div class="desktop-menu hidden-xs" v-if="!isCheckoutPage && !isThankYouPage">
-          <Navmenu />
-        </div>
-        <div class="mobile-menu" v-if="!isCheckoutPage && !isThankYouPage">
-          <hamburger-icon class="sb-mobile-menu pointer" />
-        </div>
-      </nav>-->
     </header>
+
     <div class="header-placeholder" />
   </div>
 </template>
@@ -91,7 +97,6 @@ import WishlistIcon from "theme/components/core/blocks/Header/WishlistIcon";
 import DesktopSearch from "theme/components/core/blocks/Header/DesktopSearch";
 import Telephone from "theme/components/core/blocks/Header/Telephone";
 import MainMenu from "theme/components/core/blocks/Header/MainMenu";
-
 export default {
   name: "Header",
   components: {
@@ -101,10 +106,10 @@ export default {
     Logo,
     MicrocartIcon,
     SearchIcon,
-    WishlistIcon,
     DesktopSearch,
     Telephone,
     MainMenu,
+    WishlistIcon
   },
   mixins: [CurrentPage],
   data() {
@@ -113,19 +118,19 @@ export default {
       isScrolling: false,
       scrollTop: 0,
       lastScrollTop: 0,
-      navbarHeight: 54,
+      navbarHeight: 54
     };
   },
   computed: {
     ...mapState({
-      isOpenLogin: (state) => state.ui.signUp,
-      currentUser: (state) => state.user.current,
+      isOpenLogin: state => state.ui.signUp,
+      currentUser: state => state.user.current
     }),
     isThankYouPage() {
       return this.$store.state.checkout.isThankYouPage
         ? this.$store.state.checkout.isThankYouPage
         : false;
-    },
+    }
   },
   beforeMount() {
     window.addEventListener(
@@ -135,7 +140,6 @@ export default {
       },
       { passive: true }
     );
-
     setInterval(() => {
       if (this.isScrolling) {
         this.hasScrolled();
@@ -158,48 +162,65 @@ export default {
         this.navVisible = true;
       }
       this.lastScrollTop = this.scrollTop;
-    },
-  },
+    }
+  }
 };
 </script>
 
 <style lang="scss" scoped>
 @import "~theme/css/variables/colors";
 @import "~theme/css/helpers/functions/color";
-$color-icon-hover: color(secondary, $colors-background);
+// $color-icon-hover: color(secondary, $colors-background);
 .header {
-  height: 9.25rem;
+  height: 9.825rem;
 }
-.only-mobile {
-  display: none;
-}
-header {
-  height: auto;
-  z-index: 3;
-  transition: top 0.2s ease-in-out;
-  background-color: #fff;
-  // &.is-visible {
-  //   top: 35px;
-  // }
-}
-
-.icon {
-  opacity: 1;
-  &:hover,
-  &:focus {
-    // background-color: $color-icon-hover;\
-    opacity: 1;
+.inner-icons {
+  padding-left: 124px;
+  @media (max-width: 1200px) {
+    padding: 0px;
   }
 }
+header {
+  // height: 95px;
+  // top: -55px;
+  z-index: 3;
+  transition: top 0.2s ease-in-out;
+  &.is-visible {
+  }
+  .wishlist {
+    padding: 10px;
+    .wishlist-img {
+      span {
+        display: block;
+        text-align: center;
+      }
+    }
+    .wishlist-text {
+      span {
+        font-size: 0.671875rem;
+        font-family: "Open Sans";
+        color: #808898;
+      }
+    }
+  }
+  .sb-header-right {
+    padding: 0;
+    button {
+      opacity: 1;
+    }
+  }
+}
+// .icon {
+//   opacity: 0.6;
+//   &:hover,
+//   &:focus {
+//     background-color: $color-icon-hover;
+//     opacity: 1;
+//   }
+// }
 .right-icons {
   //for edge
   float: right;
-}
-.desktop-menu {
-  width: 100%;
-  height: 47px;
-  background-color: #f2f2f2;
-  border-top: 2px solid #fff;
 }
 .header-placeholder {
   height: 54px;
@@ -207,52 +228,10 @@ header {
 .links {
   text-decoration: underline;
 }
-.sb-mobile-menu {
-  display: none;
-}
-.p-icon {
-  width: 70%;
-}
-.w-icon {
-  width: 10%;
-}
-.a-icon {
-  width: 10%;
-}
-.m-icon {
-  width: 10%;
-}
-@media (max-width: 992px) {
-  .desktop-menu {
-    display: none;
-  }
-  .mobile-menu {
-    display: block;
-    background-color: #f2f2f2;
-  }
-  .sb-mobile-menu {
-    display: block;
-  }
-}
-// @media (min-width: 992px) and (max-width: 1199px) {
-//   .header {
-//     height: 10.5rem;
-//   }
-// }
-// @media (min-width: 767px) and (max-width: 991px) {
-//   .header {
-//     height: 10.6rem;
-//   }
-// }
 @media (max-width: 767px) {
-  .px15 {
-    padding-left: 0px;
-    padding-right: 0px;
-  }
   .row.middle-xs {
     margin: 0 -15px;
-
-    & y5 {
+    &.py5 {
       margin: 0;
     }
   }
@@ -271,20 +250,22 @@ header {
     padding-left: 3px;
     padding-right: 3px;
   }
-  .only-mobile {
-    display: block;
-  }
   .sb-mobile-menu {
-    display: none;
+    display: block;
+    position: absolute !important;
+    top: 85px;
+    left: 0px;
+    height: 49px;
+    width: 53px;
+    background-color: #ffffff;
+    border: 2px solid #e3e3e5;
   }
-  nav {
-    display: none;
+  header {
+    height: 7.625rem;
   }
-  .header {
-    height: 5.54rem;
-    @media (max-width: 423px) {
-      height: 7.6rem;
-    }
+  .container {
+    padding-right: 0px;
+    padding-left: 0px;
   }
 }
 </style>

@@ -2,7 +2,10 @@
   <div
     class="inline-flex relative dropdown"
     data-testid="accountButton"
-    @click.self="goToAccount();showMenu = true;"
+    @click.self="
+      goToAccount();
+      showMenu = true;
+    "
     @keyup.enter="goToAccount"
     tabindex="0"
     role="button"
@@ -17,15 +20,23 @@
     <no-ssr>
       <div
         v-show="currentUser"
-        :class="['dropdown-content aalign-left sans-serif lh20 weight-400', !showMenu ? 'dropdown-content__hidden' : '']"
+        :class="[
+          'dropdown-content aalign-left sans-serif lh20 weight-400',
+          !showMenu ? 'dropdown-content__hidden' : ''
+        ]"
       >
         <div class="py5">
-          <div v-for="(page, index) in navigation" :key="index" @click="notify(page.title)">
+          <div
+            v-for="(page, index) in navigation"
+            :key="index"
+            @click="notify(page.title)"
+          >
             <router-link
               @click.native="showMenu = false"
               class="no-underline block py10 px15"
               :to="localizedRoute(page.link)"
-            >{{ page.title }}</router-link>
+              >{{ page.title }}</router-link
+            >
           </div>
         </div>
         <div class="py5 brdr-top-1 brdr-cl-bg-secondary">
@@ -33,7 +44,8 @@
             href="#"
             class="no-underline block py10 px15"
             @click.prevent="logout"
-          >{{ $t('Logout') }}</a>
+            >{{ $t("Logout") }}</a
+          >
         </div>
       </div>
     </no-ssr>
@@ -47,7 +59,7 @@ import AccountIcon from "@vue-storefront/core/compatibility/components/blocks/He
 export default {
   mixins: [AccountIcon],
   components: {
-    "no-ssr": NoSSR,
+    "no-ssr": NoSSR
   },
   data() {
     return {
@@ -56,7 +68,7 @@ export default {
         { title: this.$t("My profile"), link: "/my-account" },
         {
           title: this.$t("My shipping details"),
-          link: "/my-account/shipping-details",
+          link: "/my-account/shipping-details"
         },
         { title: this.$t("My newsletter"), link: "/my-account/newsletter" },
         { title: this.$t("My orders"), link: "/my-account/orders" },
@@ -64,9 +76,9 @@ export default {
         { title: this.$t("My product reviews"), link: "#" },
         {
           title: this.$t("My Recently viewed products"),
-          link: "/my-account/recently-viewed",
-        },
-      ],
+          link: "/my-account/recently-viewed"
+        }
+      ]
     };
   },
   methods: {
@@ -77,11 +89,11 @@ export default {
           message: this.$t(
             "This feature is not implemented yet! Please take a look at https://github.com/DivanteLtd/vue-storefront/issues for our Roadmap!"
           ),
-          action1: { label: this.$t("OK") },
+          action1: { label: this.$t("OK") }
         });
       }
-    },
-  },
+    }
+  }
 };
 </script>
 
@@ -93,12 +105,13 @@ $color-icon-hover: color(secondary, $colors-background);
 
 .dropdown {
   // padding-right: 42px;
+  padding-right: 17px;
   outline: none;
   button {
     pointer-events: none;
   }
   img {
-    height: 24px;
+    height: 22px;
     margin-top: 9px;
   }
   .dropdown-content {
@@ -146,8 +159,8 @@ $color-icon-hover: color(secondary, $colors-background);
     padding-right: 26px;
   }
   .dropdown img {
-    height: 30px;
-    margin-top: 3px;
+    height: 23px;
+    margin-top: 7px;
   }
 }
 @media (max-width: 423px) {

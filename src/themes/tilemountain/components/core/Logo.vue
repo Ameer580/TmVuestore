@@ -1,6 +1,15 @@
 <template>
-  <router-link :to="localizedRoute('/')" :title="$t('Home Page')" class="no-underline inline-flex">
-    <img :width="width" :height="height" src="/assets/logo.svg" :alt="$t(defaultTitle)" />
+  <router-link
+    :to="localizedRoute('/')"
+    :title="$t('Home Page')"
+    class="no-underline inline-flex"
+  >
+    <img
+      :width="width"
+      :height="height"
+      src="/assets/logo.svg"
+      :alt="$t(defaultTitle)"
+    />
   </router-link>
 </template>
 
@@ -14,19 +23,19 @@ export default {
     return {
       defaultTitle: storeView.seo.defaultTitle
         ? storeView.seo.defaultTitle
-        : config.seo.defaultTitle,
+        : config.seo.defaultTitle
     };
   },
   props: {
     width: {
       type: [String, Number],
-      required: true,
+      required: true
     },
     height: {
       type: [String, Number],
-      required: true,
-    },
-  },
+      required: true
+    }
+  }
 };
 </script>
 <style lang="scss" scoped>
@@ -37,11 +46,11 @@ export default {
 }
 @media (max-width: 767px) {
   img {
-    width: 95px;
-    height: 50px;
+    width: 130px;
+    height: 76px;
   }
   a {
-    margin-left: 90px;
+    margin-left: 31px;
   }
 }
 

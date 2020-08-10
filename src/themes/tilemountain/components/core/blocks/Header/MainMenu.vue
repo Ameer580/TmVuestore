@@ -73,7 +73,7 @@ ul li a {
   font-family: "Arial";
   font-weight: bold;
   color: #ffffff;
-  text-transform: uppercase;
+  /* text-transform: uppercase; */
 }
 .clearance {
   background-color: #24adee;

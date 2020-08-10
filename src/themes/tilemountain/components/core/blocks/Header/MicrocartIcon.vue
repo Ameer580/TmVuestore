@@ -13,12 +13,14 @@
       v-cloak
       v-show="totalQuantity"
       data-testid="minicartCount"
-    >{{ totalItems.length }}</span>
+      >{{ totalItems.length }}</span
+    >
     <span
       class="price"
       id="microcartIconPrice"
       v-if="getTotals[0].code == 'subtotal' && totalItems.length != 0"
-    >{{ getTotals[0].value | price }}</span>
+      >{{ getTotals[0].value | price }}</span
+    >
     <span class="price" id="microcartIconPrice"></span>
   </button>
 </template>
@@ -39,31 +41,31 @@ export default {
     ...mapGetters({
       totalQuantity: "cart/getItemsTotalQuantity",
       totalItems: "cart/getCartItems",
-      getTotals: "cart/getTotals",
-    }),
+      getTotals: "cart/getTotals"
+    })
   },
   methods: {
     ...mapActions({
-      openMicrocart: "ui/toggleMicrocart",
-    }),
-  },
+      openMicrocart: "ui/toggleMicrocart"
+    })
+  }
 };
 </script>
 <style scoped>
 .minicart-count {
-  top: 18px;
-  left: 17%;
+  top: 34px;
+  left: 15%;
   min-width: 20px;
   min-height: 20px;
   border-radius: 10px;
   background-color: #ed108c;
 }
 .cart {
-  padding: 0px 10px 20px 5px;
-  border: 2px solid #fff;
+  padding: 15.3px 10px 20px 5px;
+  /* border: 2px solid #fff;
   border-right: none;
   border-top: none;
-  border-bottom: none;
+  border-bottom: none; */
   width: auto;
   margin-right: -6px;
   position: relative;
@@ -72,13 +74,13 @@ export default {
   /* justify-content: center; */
 }
 img {
-  height: 25px;
-  margin-top: 21px;
+  height: 27px;
+  margin-top: 20px;
 }
 .price {
   margin-top: 30px;
   margin-left: 10px;
-  font-size: 14px;
+  font-size: 18px;
   font-weight: bold;
   color: #29275b;
 }
@@ -112,11 +114,12 @@ img {
     left: 50%;
   }
   .price {
-    font-weight: 100;
+    /* font-weight: 100;
     text-align: center;
     margin-left: 7px;
     position: absolute;
-    top: 39px;
+    top: 39px; */
+    display: none;
   }
 }
 @media (max-width: 423px) {
@@ -128,4 +131,3 @@ img {
   }
 }
 </style>
-

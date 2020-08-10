@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-cl-transparent brdr-none p0">
+  <div class="bg-cl-transparent brdr-none place">
     <button type="button" class="bg-cl-transparent brdr-none p0">
       <img src="/assets/icons/location.svg" />
       <!-- <span
@@ -20,9 +20,9 @@ export default {
 </script>
 
 <style scoped>
-button {
+/* button {
   padding-right: 13px;
-}
+} */
 .whishlist-count {
   top: 7px;
   left: 50%;
@@ -30,9 +30,12 @@ button {
   min-height: 16px;
   border-radius: 10px;
 }
+.place {
+  padding-right: 19px;
+}
 @media (max-width: 767px) {
   button {
-    display: none;
+    display: block;
   }
 }
 @media (min-width: 767px) and (max-width: 992px) {
@@ -41,7 +44,7 @@ button {
   }
 }
 img {
-  height: 25px;
+  height: 23px;
   margin-top: 12px;
 }
 </style>

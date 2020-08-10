@@ -10,8 +10,8 @@
 <script>
 export default {
   components: {
-    name: "Telephone",
-  },
+    name: "Telephone"
+  }
 };
 </script>
 
@@ -21,14 +21,14 @@ export default {
   padding-top: 12px;
 
   img {
-    margin-top: 15px;
-    height: 24px;
+    margin-top: 11px;
+    height: 29px;
   }
   p {
     margin-left: 7px;
     font-size: 17px;
     color: #29275b;
-    font-weight: 600;
+    // font-weight: 600;
   }
 }
 a.underline:after,
@@ -50,9 +50,14 @@ a:not(.no-underline):hover:after {
       padding: 13px;
     }
     img {
-      margin-top: 12px;
+      margin-top: 8px;
     }
   }
+  .contact p {
+    font-size: 14px;
+  }
+}
+@media (max-width: 1232px) and (min-width: 1200px) {
   .contact p {
     font-size: 14px;
   }
@@ -68,6 +73,12 @@ a:not(.no-underline):hover:after {
       span {
         display: none;
       }
+    }
+  }
+  .contact {
+    img {
+      margin-top: -6px;
+      height: 25px;
     }
   }
 }
